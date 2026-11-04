@@ -93,6 +93,7 @@ final class element_test extends advanced_testcase {
             'firstname' => 'User',
             'lastname' => 'Test(<script>alert("XSS")</script>)',
             'email' => 'user@example.com',
+            'username' => '12345678909',
         ]);
         $pageid = $this->get_generator()->create_page(
             $this->get_generator()->create_template((object) ['name' => 'Certificate 1'])
@@ -110,6 +111,13 @@ final class element_test extends advanced_testcase {
                     $pageid,
                     'userfield',
                     ['name' => 'User email element', 'userfield' => 'email'],
+                );
+                break;
+            case 'username':
+                $element = $this->get_generator()->create_element(
+                    $pageid,
+                    'userfield',
+                    ['name' => 'Username element', 'userfield' => 'username'],
                 );
                 break;
             case 'frogdesc':
@@ -143,6 +151,9 @@ final class element_test extends advanced_testcase {
             'email' => [
                 'email', 'user@example.com',
             ],
+            'username' => [
+                'username', '12345678909',
+            ],
             'frogdesc' => [
                 'frogdesc', 'Gryffindor',
             ],
@@ -158,6 +169,33 @@ final class element_test extends advanced_testcase {
         preg_match('|^certificateelement_(\w*)\\\\|', get_class($this), $matches);
         $form = $this->get_generator()->create_template_and_edit_element_form($matches[1]);
         $this->assertNotEmpty($form->render());
+    }
+
+    /**
+     * Tests that the user field select offers the username among the standard user fields.
+     *
+     * Sites that store an external identifier (such as a national id number) in the username
+     * need to print it; get_user_field_value() reads any user column, so only the select gates it.
+     */
+    public function test_edit_element_form_offers_username(): void {
+        $this->setAdminUser();
+
+        $form = $this->get_generator()->create_template_and_edit_element_form('userfield');
+        $doc = new \DOMDocument();
+        $previous = libxml_use_internal_errors(true);
+        $doc->loadHTML('<?xml encoding="utf-8"?>' . $form->render());
+        libxml_clear_errors();
+        libxml_use_internal_errors($previous);
+        $options = (new \DOMXPath($doc))->query('//select[@name="userfield"]/option');
+        $values = [];
+        foreach ($options as $option) {
+            $values[] = $option->getAttribute('value');
+        }
+
+        // The precondition: the select is found and carries the other standard fields.
+        $this->assertContains('email', $values);
+        $this->assertContains('idnumber', $values);
+        $this->assertContains('username', $values);
     }
 
     /**

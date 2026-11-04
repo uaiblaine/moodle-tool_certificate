@@ -42,6 +42,7 @@ class element extends \tool_certificate\element {
             'country' => fields::get_display_name('country'),
             'url' => fields::get_display_name('url'),
             'idnumber' => fields::get_display_name('idnumber'),
+            'username' => fields::get_display_name('username'),
             'institution' => fields::get_display_name('institution'),
             'department' => fields::get_display_name('department'),
             'phone1' => fields::get_display_name('phone1'),
