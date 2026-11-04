@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+### Added
+- User field element: the username can be printed on a certificate
+
 ## 5.0.11+uai.1 - 2026-10-24
 ### Added
 - Support for Moodle 5.3 (fork branch MOODLE_503_STABLE, supported = [500, 503])
