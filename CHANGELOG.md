@@ -3,6 +3,11 @@
 ## Unreleased
 ### Added
 - User field element: the username can be printed on a certificate
+### Changed
+- Web service classes and `lib.php` use `core_external` instead of the deprecated `lib/externallib.php`
+  (port of upstream WPOS-207, moodle-tool_certificate#74)
+- Tests: PHPUnit attributes instead of doc-comment metadata
+- CI: Behat waits twice as long, for 5.3's slow TinyMCE setup on hosted runners
 
 ## 5.0.11+uai.1 - 2026-10-24
 ### Added
