@@ -3,6 +3,8 @@
 ## Unreleased
 ### Added
 - User field element: the username can be printed on a certificate
+- Legal name element (`certificateelement_legalname`): prints the first and last name in the language's order,
+  whatever the site's full name format (for sites whose `fullnamedisplay` shows another name, such as `alternatename`)
 ### Changed
 - Web service classes and `lib.php` use `core_external` instead of the deprecated `lib/externallib.php`
   (port of upstream WPOS-207, moodle-tool_certificate#74)
