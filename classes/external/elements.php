@@ -14,20 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Class elements
- *
- * @package     tool_certificate
- * @copyright   2019 Marina Glancy
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace tool_certificate\external;
 
+use tool_certificate\template;
 use core_external\external_api;
 use core_external\external_function_parameters;
 use core_external\external_value;
-use tool_certificate\template;
 
 /**
  * Class elements
