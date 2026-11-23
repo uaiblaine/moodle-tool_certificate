@@ -11,6 +11,12 @@
 - Tests: PHPUnit attributes instead of doc-comment metadata
 - CI: Behat waits twice as long, for 5.3's slow TinyMCE setup on hosted runners
 
+## 5.0.12 - 2026-11-10
+### Added
+- Added support for Moodle 5.3
+### Fixed
+- Backwards compatibility fix for the launcher icon
+
 ## 5.0.11+uai.1 - 2026-10-24
 ### Added
 - Support for Moodle 5.3 (fork branch MOODLE_503_STABLE, supported = [500, 503])

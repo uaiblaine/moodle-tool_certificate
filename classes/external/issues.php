@@ -18,9 +18,9 @@ namespace tool_certificate\external;
 
 use core_external\external_api;
 use core_external\external_function_parameters;
+use core_external\external_value;
 use core_external\external_multiple_structure;
 use core_external\external_single_structure;
-use core_external\external_value;
 
 /**
  * Class issues
@@ -218,6 +218,8 @@ class issues extends external_api {
      * @return external_multiple_structure
      */
     public static function potential_users_selector_returns(): external_multiple_structure {
+        global $CFG;
+        require_once($CFG->dirroot . '/user/externallib.php');
         return new external_multiple_structure(new external_single_structure([
             'id' => new external_value(
                 \core_user::get_property_type('id'),
